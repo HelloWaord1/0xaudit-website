@@ -1,33 +1,26 @@
 #!/bin/bash
-set -e
+set -ex
 
-# Setup git credentials if GITHUB_TOKEN is provided
+echo "=== Environment ==="
+env | sort
+
+echo "=== Git credentials ==="
 if [ -n "$GITHUB_TOKEN" ]; then
     echo "https://x-access-token:${GITHUB_TOKEN}@github.com" > /data/.git-credentials
     git config --global credential.helper 'store --file /data/.git-credentials'
     echo "✅ Git credentials configured"
 fi
 
-# Clone/update workspace repo
-REPO_URL="https://github.com/HelloWaord1/0xaudit-agent.git"
-WORKSPACE_DIR="/data/.openclaw/workspace"
+echo "=== Workspace ==="
+ls -la /data/.openclaw/
+ls -la /data/.openclaw/workspace/ || echo "No workspace"
 
-if [ -d "$WORKSPACE_DIR/.git" ]; then
-    echo "📦 Pulling latest workspace..."
-    cd "$WORKSPACE_DIR"
-    git pull origin main || true
-else
-    echo "📦 Cloning workspace..."
-    rm -rf "$WORKSPACE_DIR"
-    git clone "$REPO_URL" /tmp/repo
-    mv /tmp/repo/workspace "$WORKSPACE_DIR"
-    cd "$WORKSPACE_DIR"
-    git init
-    git remote add origin "$REPO_URL"
-fi
+echo "=== Config ==="
+cat /data/.openclaw/openclaw.json
 
-# Start OpenClaw Gateway (foreground mode for Docker)
-echo "🚀 Starting OpenClaw..."
-# Use Railway's PORT or default to 8080
+echo "=== OpenClaw version ==="
+openclaw --version
+
+echo "=== Starting OpenClaw Gateway ==="
 PORT=${PORT:-8080}
-exec openclaw gateway run --bind auto --port $PORT --verbose
+exec openclaw gateway run --port $PORT --allow-unconfigured --verbose 2>&1

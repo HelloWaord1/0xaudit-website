@@ -1,20 +1,14 @@
 #!/bin/bash
-set -x
+set -e
 
-echo "=== Git credentials ==="
+# Setup git credentials for self-improvement
 if [ -n "$GITHUB_TOKEN" ]; then
     echo "https://x-access-token:${GITHUB_TOKEN}@github.com" > /data/.git-credentials
     git config --global credential.helper 'store --file /data/.git-credentials'
     echo "✅ Git credentials configured"
 fi
 
-echo "=== Testing OpenClaw ==="
-openclaw status --all 2>&1 || echo "Status failed (expected)"
-
-echo "=== Starting OpenClaw Gateway ==="
+# Start OpenClaw Gateway
+echo "🚀 Starting Edward (0xAudit)..."
 PORT=${PORT:-8080}
-
-# Run without exec to capture errors
-openclaw gateway run --port $PORT --allow-unconfigured --verbose 2>&1
-
-echo "=== Gateway exited with code $? ==="
+exec openclaw gateway run --port $PORT --verbose

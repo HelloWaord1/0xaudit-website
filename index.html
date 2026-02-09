@@ -378,10 +378,10 @@ h4 { font-size: 15px; font-weight: 600; color: var(--text-white); }
     </div>
 
     <div class="grid-4 mt-64">
-      <div><div class="stat-value">82+</div><div class="stat-label">Vulnerabilities found</div></div>
-      <div><div class="stat-value">9</div><div class="stat-label">Critical findings</div></div>
-      <div><div class="stat-value">23</div><div class="stat-label">Security tools</div></div>
-      <div><div class="stat-value">105</div><div class="stat-label">AI agent security checks</div></div>
+      <div><div class="stat-value" id="stat-vulns">82+</div><div class="stat-label">Vulnerabilities found</div></div>
+      <div><div class="stat-value" id="stat-critical">9</div><div class="stat-label">Critical findings</div></div>
+      <div><div class="stat-value" id="stat-tools">23</div><div class="stat-label">Security tools</div></div>
+      <div><div class="stat-value" id="stat-checks">105</div><div class="stat-label">AI agent security checks</div></div>
     </div>
   </div>
 </section>
@@ -966,6 +966,16 @@ document.getElementById('contactForm').addEventListener('submit', async (e) => {
     btn.disabled = false;
   }
 });
+// Fetch live stats
+fetch('https://0-x-audit.com/api/stats')
+  .then(r => r.json())
+  .then(d => {
+    if (d.vulnerabilities) document.getElementById('stat-vulns').textContent = d.vulnerabilities + '+';
+    if (d.critical_findings) document.getElementById('stat-critical').textContent = d.critical_findings;
+    if (d.security_tools) document.getElementById('stat-tools').textContent = d.security_tools;
+    if (d.ai_agent_checks) document.getElementById('stat-checks').textContent = d.ai_agent_checks;
+  })
+  .catch(() => {}); // fallback to static values in HTML
 </script>
 </body>
 </html>

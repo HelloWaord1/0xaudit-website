@@ -26,6 +26,6 @@ else
     git remote add origin "$REPO_URL"
 fi
 
-# Start OpenClaw
+# Start OpenClaw Gateway
 echo "🚀 Starting OpenClaw..."
-exec openclaw gateway start --foreground
+exec openclaw gateway start

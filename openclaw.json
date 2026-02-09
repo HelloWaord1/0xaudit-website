@@ -6,7 +6,7 @@
   "channels": {
     "telegram": {
       "enabled": true,
-      "dmPolicy": "open",
+      "dmPolicy": "allowlist",
       "botToken": "8544736597:AAFPhQad2w06ndMbCIzru_mRTu5n0Volhns",
       "allowFrom": ["6937496786"],
       "groupPolicy": "disabled",
@@ -16,7 +16,7 @@
   "gateway": {
     "port": 8080,
     "mode": "local",
-    "bind": "0.0.0.0"
+    "bind": "lan"
   },
   "agents": {
     "defaults": {

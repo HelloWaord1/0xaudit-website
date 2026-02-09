@@ -6,6 +6,7 @@ RUN apt-get update && apt-get install -y \
     git \
     curl \
     jq \
+    socat \
     && rm -rf /var/lib/apt/lists/*
 
 # Install OpenClaw

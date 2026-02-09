@@ -3,7 +3,6 @@ FROM node:22-bookworm
 # Install security tools (lightweight)
 RUN apt-get update && apt-get install -y \
     nmap \
-    nikto \
     git \
     curl \
     jq \

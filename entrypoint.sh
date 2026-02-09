@@ -26,6 +26,8 @@ else
     git remote add origin "$REPO_URL"
 fi
 
-# Start OpenClaw Gateway
+# Start OpenClaw Gateway (foreground mode for Docker)
 echo "🚀 Starting OpenClaw..."
-exec openclaw gateway start
+# Use Railway's PORT or default to 8080
+PORT=${PORT:-8080}
+exec openclaw gateway run --bind auto --port $PORT --verbose

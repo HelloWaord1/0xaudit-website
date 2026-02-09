@@ -1,0 +1,29 @@
+{
+  "commands": {
+    "native": "auto",
+    "nativeSkills": "auto"
+  },
+  "channels": {
+    "telegram": {
+      "enabled": true,
+      "dmPolicy": "open",
+      "botToken": "8544736597:AAFPhQad2w06ndMbCIzru_mRTu5n0Volhns",
+      "allowFrom": ["6937496786"],
+      "groupPolicy": "disabled",
+      "streamMode": "off"
+    }
+  },
+  "gateway": {
+    "port": 8080,
+    "mode": "local",
+    "bind": "0.0.0.0"
+  },
+  "agents": {
+    "defaults": {
+      "maxConcurrent": 4,
+      "subagents": {
+        "maxConcurrent": 4
+      }
+    }
+  }
+}

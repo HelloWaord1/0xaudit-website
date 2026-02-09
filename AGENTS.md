@@ -63,6 +63,7 @@ railway up --detach
 1. **Stratwise** (stratwise.ai) — HIGH priority, финансы
 2. **OSENT** — MEDIUM priority
 3. **Longivity** — MEDIUM priority
+4. **NovaWallet** (app.novawallet.org) — HIGH priority, финансы/крипто
 
 ## Tools
 - Nuclei — vulnerability scanning

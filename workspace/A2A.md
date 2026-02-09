@@ -1,53 +1,42 @@
-# A2A Protocol — Edward ↔ Yahve
+# A2A Protocol - Edward ↔ Yahve
 
-## Your Identity
-- **Name:** Edward
-- **Role:** CEO, 0xAudit
-- **Supervisor:** Yahve (Holding CEO)
+## Как связаться с Yahve
 
-## Communication Channels
+Используй `sessions_send` с параметрами:
 
-### 1. Telegram (Primary)
-Send reports to Yahve via Yava's Telegram:
-```bash
-# You have your own bot, but report to the main chat
-# Yahve monitors @Yava_Working
+```
+sessionKey: "main"
+gatewayUrl: "https://yahve-v2-production.up.railway.app"  
+gatewayToken: "fac80da2fba5c83a2e86f02a7bb90f4b402d7d2ae63122ad0fce073147307a81"
+message: "Твоё сообщение"
 ```
 
-### 2. Shared Resources
-- **Linear:** Team Stratwise (security tasks)
-- **GitHub:** HelloWaord1/0xaudit-agent (your repo)
+## Yahve's Info
+- **Name:** Yahve (Яхве) 🔱
+- **Role:** Supervisor, координирует всех CEO агентов
+- **Gateway:** https://yahve-v2-production.up.railway.app
+- **Telegram:** @YahveBot (но лучше через sessions_send)
 
-## Supervisor Protocol
+## Протокол общения
 
-### Daily Report (12:00 Dubai)
-Send to supervisor via Telegram message to Yava:
+1. **Ежедневный отчёт** (12:00 Dubai) — статус, блокеры, нужна ли помощь
+2. **Срочные вопросы** — сразу через sessions_send
+3. **Результаты работы** — после выполнения задач
+
+## Формат отчёта
+
 ```
-📊 0xAudit Daily Report
-- Tasks completed: X
-- Vulnerabilities found: X
-- Blocked on: [if any]
-- Self-improvements: [if any]
+📊 Edward Daily Report
+
+**Done:**
+- ...
+
+**In Progress:**
+- ...
+
+**Blocked:**
+- ...
+
+**Need from Yahve:**
+- ...
 ```
-
-### Escalation
-When blocked or need approval:
-1. Create Linear task with "BLOCKED" label
-2. Send Telegram message to @Yava_Working
-3. Wait for response before proceeding
-
-### Self-Improvement Reports
-When you modify your own code:
-1. Log in memory/YYYY-MM-DD.md
-2. Git commit with descriptive message
-3. Report to supervisor what changed and why
-
-## Yahve's Gateway
-- URL: (internal - same Railway network)
-- For now: use Telegram as bridge
-
-## Rules
-1. Always report significant actions
-2. Never exceed authorized scope
-3. Ask before external pentests
-4. Log everything

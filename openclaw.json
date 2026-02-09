@@ -15,7 +15,10 @@
   },
   "gateway": {
     "port": 8080,
-    "mode": "local"
+    "mode": "local",
+    "auth": {
+      "mode": "token"
+    }
   },
   "agents": {
     "defaults": {

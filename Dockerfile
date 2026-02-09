@@ -40,5 +40,14 @@ COPY openclaw.json /data/.openclaw/openclaw.json
 ENV OPENCLAW_WORKSPACE=/data/.openclaw/workspace
 ENV HOME=/data
 
+# Git config for self-improvement
+RUN git config --global user.name "Edward (0xAudit)" && \
+    git config --global user.email "edward@0xaudit.ai" && \
+    git config --global credential.helper store
+
+# Init workspace as git repo (will clone on first run)
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
 # Run OpenClaw
-CMD ["openclaw", "gateway", "start", "--foreground"]
+CMD ["/entrypoint.sh"]

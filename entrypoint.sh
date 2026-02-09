@@ -1,8 +1,5 @@
 #!/bin/bash
-set -ex
-
-echo "=== Environment ==="
-env | sort
+set -x
 
 echo "=== Git credentials ==="
 if [ -n "$GITHUB_TOKEN" ]; then
@@ -11,16 +8,13 @@ if [ -n "$GITHUB_TOKEN" ]; then
     echo "✅ Git credentials configured"
 fi
 
-echo "=== Workspace ==="
-ls -la /data/.openclaw/
-ls -la /data/.openclaw/workspace/ || echo "No workspace"
-
-echo "=== Config ==="
-cat /data/.openclaw/openclaw.json
-
-echo "=== OpenClaw version ==="
-openclaw --version
+echo "=== Testing OpenClaw ==="
+openclaw status --all 2>&1 || echo "Status failed (expected)"
 
 echo "=== Starting OpenClaw Gateway ==="
 PORT=${PORT:-8080}
-exec openclaw gateway run --port $PORT --allow-unconfigured --verbose 2>&1
+
+# Run without exec to capture errors
+openclaw gateway run --port $PORT --allow-unconfigured --verbose 2>&1
+
+echo "=== Gateway exited with code $? ==="

@@ -1,5 +1,4 @@
 # HEARTBEAT.md
 
-# Keep this file empty (or with only comments) to skip heartbeat API calls.
-
-# Add tasks below when you want the agent to check something periodically.
+## Check new leads
+- If /data/.openclaw/workspace/business/new-leads.json exists and has content, read it, process each lead (prepare response), then clear the file.

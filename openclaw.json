@@ -16,8 +16,7 @@
   "gateway": {
     "port": 8080,
     "mode": "local",
-    "bind": "custom",
-    "bindHost": "0.0.0.0"
+    "bind": "lan"
   },
   "agents": {
     "defaults": {

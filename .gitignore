@@ -1,6 +1,0 @@
-node_modules/
-crypto/.wallet-encrypted
-crypto/.mnemonic-encrypted
-/tmp/
-*.key
-.secrets/

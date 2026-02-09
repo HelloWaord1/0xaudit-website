@@ -8,11 +8,30 @@ if [ -n "$GITHUB_TOKEN" ]; then
     echo "✅ Git credentials configured"
 fi
 
-# For Railway: need to bind to 0.0.0.0
-# OpenClaw uses HOST env var for custom bind
-export HOST="0.0.0.0"
-
-# Start OpenClaw Gateway
-echo "🚀 Starting Edward (0xAudit) on 0.0.0.0:${PORT:-8080}..."
+# Start OpenClaw Gateway with auto bind
+echo "🚀 Starting Edward (0xAudit)..."
 PORT=${PORT:-8080}
-exec openclaw gateway run --port $PORT --bind lan --verbose
+
+# Try to patch the config to remove bind restriction
+cat > /data/.openclaw/openclaw.json << 'EOF'
+{
+  "commands": { "native": "auto", "nativeSkills": "auto" },
+  "channels": {
+    "telegram": {
+      "enabled": true,
+      "dmPolicy": "allowlist",
+      "botToken": "${TELEGRAM_BOT_TOKEN}",
+      "allowFrom": ["6937496786"],
+      "groupPolicy": "disabled",
+      "streamMode": "off"
+    }
+  },
+  "gateway": { "port": 8080, "mode": "local" },
+  "agents": { "defaults": { "maxConcurrent": 4, "subagents": { "maxConcurrent": 4 } } }
+}
+EOF
+
+# Inject the actual bot token
+sed -i "s|\${TELEGRAM_BOT_TOKEN}|8544736597:AAFPhQad2w06ndMbCIzru_mRTu5n0Volhns|g" /data/.openclaw/openclaw.json
+
+exec openclaw gateway run --port $PORT --verbose 2>&1

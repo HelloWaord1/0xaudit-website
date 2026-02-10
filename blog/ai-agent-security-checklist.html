@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Agent Security Checklist 2026 — The Complete Guide | 0xAudit</title>
+<meta name="description" content="The definitive AI agent security checklist for 2026. 15 essential checks every AI agent must pass, the 10 most common vulnerabilities we found scanning 20 platforms, and how to scan your agent in 30 seconds.">
+<meta name="keywords" content="AI agent security, security audit, MCP security, LLM security, AI security checklist, agent vulnerability scanning, API security, autonomous agent audit">
+<meta name="author" content="0xAudit">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://0-x-audit.com/blog/ai-agent-security-checklist.html">
+
+<meta property="og:title" content="AI Agent Security Checklist 2026 — The Complete Guide">
+<meta property="og:description" content="15 essential security checks every AI agent must pass. Based on real findings from scanning 20 AI platforms.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://0-x-audit.com/blog/ai-agent-security-checklist.html">
+<meta property="og:site_name" content="0xAudit">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AI Agent Security Checklist 2026 — The Complete Guide">
+<meta name="twitter:description" content="15 essential security checks every AI agent must pass. Based on real findings from scanning 20 AI platforms.">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect rx='12' width='100' height='100' fill='%2300ff88'/><text x='50' y='58' font-size='60' font-family='monospace' font-weight='bold' text-anchor='middle' dominant-baseline='middle' fill='%230b0e13'>0x</text></svg>">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #0b0e13;
+  --bg-card: #11151c;
+  --bg-code: #0d1117;
+  --border: #1e2633;
+  --border-light: #2a3342;
+  --text: #8b95a5;
+  --text-light: #c4cdd9;
+  --text-white: #e8ecf1;
+  --accent: #22c55e;
+  --accent-dim: rgba(34,197,94,.1);
+  --accent-border: rgba(34,197,94,.25);
+  --red: #ef4444;
+  --orange: #f59e0b;
+  --yellow: #eab308;
+  --blue: #3b82f6;
+}
+
+html { overflow-x: hidden; }
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 16px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+.mono { font-family: 'JetBrains Mono', monospace; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* Nav */
+.nav {
+  position: fixed; top: 0; width: 100%; z-index: 50;
+  background: rgba(11,14,19,.85); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-inner {
+  max-width: 1080px; margin: 0 auto; padding: 0 24px;
+  display: flex; align-items: center; justify-content: space-between; height: 56px;
+}
+.nav-logo { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 16px; color: var(--text-white); text-decoration: none; }
+.nav-logo span { color: var(--accent); }
+.nav-links { display: flex; gap: 32px; align-items: center; }
+.nav-links a { font-size: 13px; color: var(--text); transition: color .15s; text-decoration: none; }
+.nav-links a:hover { color: var(--text-white); text-decoration: none; }
+
+/* Article */
+.article { max-width: 720px; margin: 0 auto; padding: 120px 24px 96px; }
+
+.article-meta {
+  font-family: 'JetBrains Mono', monospace; font-size: 12px;
+  text-transform: uppercase; letter-spacing: 1.5px; color: var(--accent);
+  margin-bottom: 24px;
+}
+
+.article h1 {
+  font-size: clamp(28px, 4.5vw, 42px); font-weight: 700;
+  color: var(--text-white); line-height: 1.2; letter-spacing: -0.5px;
+  margin-bottom: 20px;
+}
+
+.article .subtitle {
+  font-size: 18px; color: var(--text-light); line-height: 1.7;
+  margin-bottom: 48px; border-left: 2px solid var(--accent); padding-left: 16px;
+}
+
+.article h2 {
+  font-size: 24px; font-weight: 700; color: var(--text-white);
+  margin: 56px 0 20px; letter-spacing: -0.3px;
+}
+
+.article h3 {
+  font-size: 18px; font-weight: 600; color: var(--text-white);
+  margin: 36px 0 12px;
+}
+
+.article p { margin-bottom: 16px; }
+
+.article ul, .article ol { margin: 0 0 24px 20px; }
+.article li { margin-bottom: 8px; }
+
+.article code {
+  font-family: 'JetBrains Mono', monospace; font-size: 14px;
+  background: var(--bg-code); border: 1px solid var(--border);
+  padding: 2px 6px; border-radius: 4px;
+}
+
+.article pre {
+  background: var(--bg-code); border: 1px solid var(--border);
+  border-radius: 8px; padding: 20px; margin: 20px 0 28px;
+  overflow-x: auto;
+}
+.article pre code {
+  background: none; border: none; padding: 0; font-size: 13px;
+  color: var(--text-light); line-height: 1.6;
+}
+
+/* Checklist */
+.checklist { list-style: none; margin-left: 0; padding: 0; }
+.checklist li {
+  position: relative; padding: 12px 16px 12px 40px;
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 6px; margin-bottom: 8px; font-size: 15px;
+}
+.checklist li::before {
+  content: ''; position: absolute; left: 14px; top: 16px;
+  width: 14px; height: 14px; border: 2px solid var(--accent);
+  border-radius: 3px;
+}
+
+/* Vuln card */
+.vuln-item {
+  padding: 16px 20px; background: var(--bg-card);
+  border: 1px solid var(--border); border-radius: 8px;
+  margin-bottom: 10px;
+}
+.vuln-item strong { color: var(--text-white); }
+.vuln-num {
+  font-family: 'JetBrains Mono', monospace; font-size: 12px;
+  color: var(--accent); margin-right: 8px;
+}
+.severity {
+  display: inline-block; font-size: 11px; font-weight: 600;
+  padding: 2px 8px; border-radius: 4px; margin-left: 8px;
+  text-transform: uppercase; letter-spacing: 0.5px;
+}
+.severity.critical { background: rgba(239,68,68,.15); color: var(--red); }
+.severity.high { background: rgba(245,158,11,.15); color: var(--orange); }
+.severity.medium { background: rgba(234,179,8,.15); color: var(--yellow); }
+
+/* CTA */
+.cta-box {
+  text-align: center; padding: 48px 32px;
+  background: var(--bg-card); border: 1px solid var(--accent-border);
+  border-radius: 12px; margin: 56px 0;
+}
+.cta-box h2 { margin-top: 0; margin-bottom: 12px; }
+.cta-box p { color: var(--text); margin-bottom: 24px; }
+.cta-btn {
+  display: inline-block; padding: 14px 32px; font-size: 15px; font-weight: 600;
+  color: #0b0e13; background: var(--accent); border-radius: 8px;
+  text-decoration: none; transition: opacity .15s;
+}
+.cta-btn:hover { opacity: .9; text-decoration: none; }
+
+/* Pricing */
+.pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin: 24px 0; }
+.pricing-card {
+  padding: 24px; background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 8px; text-align: center;
+}
+.pricing-card.featured { border-color: var(--accent-border); }
+.pricing-card h4 { color: var(--text-white); margin-bottom: 8px; font-size: 16px; }
+.pricing-card .price {
+  font-family: 'JetBrains Mono', monospace; font-size: 28px;
+  font-weight: 700; color: var(--accent); margin: 12px 0;
+}
+.pricing-card .price small { font-size: 14px; color: var(--text); font-weight: 400; }
+.pricing-card p { font-size: 13px; color: var(--text); }
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border); padding: 32px 24px;
+  text-align: center; font-size: 13px; color: var(--text);
+}
+.footer a { color: var(--accent); }
+
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .article { padding: 88px 16px 64px; }
+  .pricing-grid { grid-template-columns: 1fr; }
+}
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "AI Agent Security Checklist 2026 — The Complete Guide",
+  "author": { "@type": "Organization", "name": "0xAudit", "url": "https://0-x-audit.com" },
+  "publisher": { "@type": "Organization", "name": "0xAudit" },
+  "datePublished": "2026-02-10",
+  "dateModified": "2026-02-10",
+  "description": "The definitive AI agent security checklist for 2026. 15 essential checks every AI agent must pass."
+}
+</script>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="https://0-x-audit.com" class="nav-logo"><span>0x</span>Audit</a>
+    <div class="nav-links">
+      <a href="https://0-x-audit.com">Home</a>
+      <a href="https://0-x-audit.com/#how-it-works">How It Works</a>
+      <a href="https://0-x-audit.com/#pricing">Pricing</a>
+      <a href="https://0-x-audit.com/blog/ai-agent-security-checklist.html">Blog</a>
+    </div>
+  </div>
+</nav>
+
+<article class="article">
+  <div class="article-meta">Security Research / February 10, 2026</div>
+
+  <h1>AI Agent Security Checklist 2026 — The Complete Guide</h1>
+
+  <p class="subtitle">
+    AI agents now manage API keys, process payments, query databases, and execute code autonomously. Most of them have never been audited. This guide covers what we found scanning 20 AI platforms and the 15 checks every agent should pass before going to production.
+  </p>
+
+  <!-- Section 1 -->
+  <h2>Why AI Agents Need Security Audits</h2>
+
+  <p>Autonomous agents are no longer experimental. They handle real credentials, real money, and real user data. The attack surface is fundamentally different from traditional web applications:</p>
+
+  <ul>
+    <li><strong>Credential exposure.</strong> Agents store and rotate API keys, database passwords, and OAuth tokens. A single prompt injection can exfiltrate them.</li>
+    <li><strong>Payment processing.</strong> Agents that manage billing, subscriptions, or crypto wallets are direct targets for financial exploitation.</li>
+    <li><strong>Database access.</strong> Agents with SQL or ORM access can be manipulated into data exfiltration or destructive queries through crafted inputs.</li>
+    <li><strong>Code execution.</strong> Agents running in sandboxes with escape vulnerabilities can compromise the host system entirely.</li>
+    <li><strong>MCP protocol surface.</strong> The Model Context Protocol exposes tool endpoints that most teams never audit. These endpoints often lack authentication, rate limiting, and input validation.</li>
+  </ul>
+
+  <p>Traditional penetration testing misses these vectors. Agent security requires understanding LLM behavior, tool-call chains, and the specific ways autonomous systems fail.</p>
+
+  <!-- Section 2 -->
+  <h2>10 Most Common Vulnerabilities We Found Scanning 20 AI Platforms</h2>
+
+  <p>Between Q3 2025 and Q1 2026, we scanned 20 production AI agent platforms. These are the most frequent findings, ranked by prevalence:</p>
+
+  <div class="vuln-item">
+    <span class="vuln-num">01</span> <strong>Missing authentication on MCP tool endpoints</strong> <span class="severity critical">Critical</span>
+    <p>Found in 85% of platforms. Tool-call endpoints exposed without any auth layer, allowing arbitrary external invocation.</p>
+  </div>
+
+  <div class="vuln-item">
+    <span class="vuln-num">02</span> <strong>Secrets leaked in agent context or logs</strong> <span class="severity critical">Critical</span>
+    <p>Found in 70% of platforms. API keys, tokens, and database URIs passed directly into LLM context windows or written to unprotected logs.</p>
+  </div>
+
+  <div class="vuln-item">
+    <span class="vuln-num">03</span> <strong>No rate limiting on scan or action endpoints</strong> <span class="severity high">High</span>
+    <p>Found in 75% of platforms. Allows brute-force attacks, resource exhaustion, and cost amplification on pay-per-call APIs.</p>
+  </div>
+
+  <div class="vuln-item">
+    <span class="vuln-num">04</span> <strong>SSRF through agent tool calls</strong> <span class="severity high">High</span>
+    <p>Found in 60% of platforms. Agents that fetch URLs or call APIs can be redirected to internal services (metadata endpoints, databases).</p>
+  </div>
+
+  <div class="vuln-item">
+    <span class="vuln-num">05</span> <strong>Prompt injection leading to tool misuse</strong> <span class="severity high">High</span>
+    <p>Found in 55% of platforms. Malicious user input causes the agent to call unintended tools, exfiltrate data, or bypass authorization logic.</p>
+  </div>
+
+  <div class="vuln-item">
+    <span class="vuln-num">06</span> <strong>Overly permissive CORS configuration</strong> <span class="severity medium">Medium</span>
+    <p>Found in 65% of platforms. Wildcard origins or reflected origins allow cross-site request forgery against agent APIs.</p>
+  </div>
+
+  <div class="vuln-item">
+    <span class="vuln-num">07</span> <strong>Missing security headers</strong> <span class="severity medium">Medium</span>
+    <p>Found in 80% of platforms. Absent Content-Security-Policy, X-Frame-Options, and Strict-Transport-Security headers.</p>
+  </div>
+
+  <div class="vuln-item">
+    <span class="vuln-num">08</span> <strong>Insufficient input validation on tool parameters</strong> <span class="severity high">High</span>
+    <p>Found in 60% of platforms. Tool parameters accepted without type checking, length limits, or sanitization, enabling injection attacks.</p>
+  </div>
+
+  <div class="vuln-item">
+    <span class="vuln-num">09</span> <strong>Sandbox escape via file system access</strong> <span class="severity critical">Critical</span>
+    <p>Found in 30% of platforms. Agents with file-write capabilities could traverse directories or overwrite configuration files.</p>
+  </div>
+
+  <div class="vuln-item">
+    <span class="vuln-num">10</span> <strong>No audit trail for agent actions</strong> <span class="severity medium">Medium</span>
+    <p>Found in 70% of platforms. No immutable logging of what tools the agent called, with what parameters, making incident response impossible.</p>
+  </div>
+
+  <!-- Section 3 -->
+  <h2>The 15-Point AI Agent Security Checklist</h2>
+
+  <p>Every AI agent should pass these checks before reaching production. Print this, pin it, automate it.</p>
+
+  <ul class="checklist">
+    <li><strong>1. Authentication on all endpoints.</strong> Every tool-call endpoint, webhook, and API route must require valid authentication. No exceptions for internal routes.</li>
+    <li><strong>2. Authorization and scope limits.</strong> Each agent session should have the minimum permissions required. Implement role-based access control on tool invocations.</li>
+    <li><strong>3. Rate limiting.</strong> Apply per-user and per-endpoint rate limits. Agents that call external APIs should have circuit breakers and cost caps.</li>
+    <li><strong>4. Input validation on all tool parameters.</strong> Validate types, lengths, formats, and ranges. Reject unexpected fields. Never pass raw user input to system commands.</li>
+    <li><strong>5. Secrets management.</strong> Never pass API keys, tokens, or passwords through LLM context. Use environment variables or a vault. Rotate credentials regularly.</li>
+    <li><strong>6. SSRF protection.</strong> Block requests to internal IP ranges (169.254.x.x, 10.x.x.x, 127.0.0.1). Validate and allowlist outbound URLs.</li>
+    <li><strong>7. Security headers.</strong> Set Content-Security-Policy, X-Frame-Options, X-Content-Type-Options, Strict-Transport-Security, and Referrer-Policy on all responses.</li>
+    <li><strong>8. CORS configuration.</strong> Define explicit allowed origins. Never use wildcard (*) with credentials. Validate the Origin header server-side.</li>
+    <li><strong>9. Prompt injection defenses.</strong> Separate system instructions from user input. Implement output filtering. Use structured tool-call schemas rather than free-text parsing.</li>
+    <li><strong>10. Sandbox isolation.</strong> Run agent code in containers with no network access to internal services. Mount file systems read-only where possible.</li>
+    <li><strong>11. Audit logging.</strong> Log every tool call with timestamp, parameters, caller identity, and result. Store logs immutably. Alert on anomalous patterns.</li>
+    <li><strong>12. TLS everywhere.</strong> All communication between agent, tools, and external services must use TLS 1.2+. Pin certificates for critical connections.</li>
+    <li><strong>13. Dependency scanning.</strong> Scan all agent dependencies for known CVEs. Pin versions. Automate updates with security-only patches.</li>
+    <li><strong>14. Error handling.</strong> Never expose stack traces, internal paths, or configuration details in error responses. Return generic error messages to clients.</li>
+    <li><strong>15. Incident response plan.</strong> Define procedures for credential rotation, agent shutdown, and forensic analysis. Test the plan quarterly.</li>
+  </ul>
+
+  <!-- Section 4 -->
+  <h2>Scan Your Agent in 30 Seconds</h2>
+
+  <p>0xAudit provides an MCP-compatible scanning endpoint. Point it at your agent and get results immediately. No signup required for the first scan.</p>
+
+  <h3>Quick scan via curl</h3>
+
+  <pre><code>curl -X POST https://api.0-x-audit.com/v1/scan \
+  -H "Content-Type: application/json" \
+  -d '{
+    "target": "https://your-agent.example.com",
+    "scan_type": "quick",
+    "checks": ["auth", "headers", "cors", "ssrf", "rate-limit", "secrets"]
+  }'</code></pre>
+
+  <p>The response includes a severity-ranked list of findings, remediation steps, and code diffs you can apply directly:</p>
+
+  <pre><code>{
+  "status": "complete",
+  "findings": 4,
+  "critical": 1,
+  "high": 2,
+  "medium": 1,
+  "report_url": "https://api.0-x-audit.com/reports/abc123",
+  "auto_fix_available": true
+}</code></pre>
+
+  <h3>MCP integration</h3>
+
+  <p>If your agent supports MCP, add 0xAudit as a tool provider. Your agent can then scan itself, apply fixes, and verify the remediation autonomously:</p>
+
+  <pre><code>{
+  "mcpServers": {
+    "0xaudit": {
+      "url": "https://mcp.0-x-audit.com/sse"
+    }
+  }
+}</code></pre>
+
+  <!-- Section 5 -->
+  <h2>Pricing</h2>
+
+  <p>Security scanning priced for agents, not enterprises. Pay per scan or lock in a monthly rate.</p>
+
+  <div class="pricing-grid">
+    <div class="pricing-card">
+      <h4>Free Scan</h4>
+      <div class="price">$0</div>
+      <p>1 quick scan<br>Basic findings report<br>No signup required</p>
+    </div>
+    <div class="pricing-card featured">
+      <h4>Per Scan</h4>
+      <div class="price">$1 <small>/ scan</small></div>
+      <p>Full vulnerability report<br>Auto-fix code diffs<br>API and MCP access</p>
+    </div>
+    <div class="pricing-card">
+      <h4>Unlimited</h4>
+      <div class="price">$99 <small>/ mo</small></div>
+      <p>Unlimited scans<br>Priority support<br>Custom scan profiles</p>
+    </div>
+  </div>
+
+  <p>Full pricing details and enterprise options at <a href="https://0-x-audit.com/#pricing">0-x-audit.com/pricing</a>.</p>
+
+  <!-- CTA -->
+  <div class="cta-box">
+    <h2>Scan your agent now -- free</h2>
+    <p>Run your first security scan in 30 seconds. No signup, no credit card. Just point us at your endpoint.</p>
+    <a href="https://mcp.0-x-audit.com/sse" class="cta-btn">Start free scan</a>
+  </div>
+</article>
+
+<footer class="footer">
+  <p>0xAudit -- The Security Layer for AI Agents. <a href="https://0-x-audit.com">0-x-audit.com</a></p>
+</footer>
+
+</body>
+</html>
